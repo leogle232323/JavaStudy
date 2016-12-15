@@ -12,5 +12,7 @@ public class SystemProperty {
 			System.err.println(strSplit[i]);
 		}
 		
+		System.err.println("测试git提交");
+		
 	}
 }
