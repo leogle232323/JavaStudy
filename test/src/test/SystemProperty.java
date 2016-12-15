@@ -13,6 +13,7 @@ public class SystemProperty {
 		}
 		
 		System.err.println("测试git提交");
+		System.out.println("theSecondeBranch");
 		
 	}
 }
