@@ -9,12 +9,8 @@ public class SystemProperty {
 		String str = sysProperty.toString();
 		String[] strSplit = str.split("\\,");
 		for(int i = 0;i < strSplit.length;i++){
-			System.err.println(strSplit[i]);
+			System.out.println(strSplit[i]);
 		}
-		
-		System.err.println("测试git提交");
-		System.out.println("theSecondeBranch......");
-		System.err.println("测试提交创建git分支");
 		
 	}
 }
