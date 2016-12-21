@@ -12,10 +12,12 @@ public class BigIntegerAndBigDecimal {
 	int  i = 12345;
 	long l = 1111111111;
 	
+	BigInteger cc = BigInteger.valueOf(ch);
 	BigInteger bb = BigInteger.valueOf(b);
 	BigInteger bi = BigInteger.valueOf(i);
 	BigInteger bl = BigInteger.valueOf(l);
 	
+	System.out.println(cc);
 	System.out.println(bb);
 	System.out.println(bi);
 	System.out.println(bl);
@@ -72,7 +74,7 @@ public class BigIntegerAndBigDecimal {
 	int q = bb.compareTo(bi);
 	System.out.println(q);
 	
-	//compareTo 返回两个字符串首次出现不同字符的差值，负数表示前者小，正数表示前者大，0表示相等
+	//compareTo 返回两个字符串首次出现不同字符的字符差值，负数表示前者小，正数表示前者大，0表示相等
 	String aaa = "abcedfg";
 	String bbb = "abcedfg";
 	String ccc = "ABCedfg";
@@ -88,8 +90,8 @@ public class BigIntegerAndBigDecimal {
 	
 	
 	//构造函数
-
-	//	String str = "abcedf";
+//
+//	String str = "abcedf";
 //	BigInteger s = new BigInteger(str);
 //	System.out.println(s);
 	
