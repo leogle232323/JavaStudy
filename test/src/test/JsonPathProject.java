@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import org.json.simple.JSONObject;
 import com.jayway.restassured.path.json.JsonPath;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.RequestBody;
+
 import tools.HttpUtil;
 
 
 public class JsonPathProject {
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException{
 		String url1 = "http://wxfws.zbj.com/seller/user/login";
 		JSONObject para1 = new JSONObject();
@@ -22,6 +25,14 @@ public class JsonPathProject {
 		System.out.println(jp.getInt("errCode"));
 		System.out.println(jp.getString("errMsg"));
 		System.out.println(jp.getMap("data").get("token"));
+		
+		
+		RequestBody body = new FormEncodingBuilder().add("userId", "19182358")
+				.add("mstoken", "5faf0e7dfee2498597754f2b862bb41e9PsoAyIyHN2LnszLRinYO6QQhT8XrEXFsPgbOwKUxpINkPsp1dLiBE9q0DqAXeXA")
+				.build();
+		
+		String res = HttpUtil.post("http://m.t4.zbjdev.com/bidpay/sendSms", body);
+		System.out.println(res);
 		
 	}
 }

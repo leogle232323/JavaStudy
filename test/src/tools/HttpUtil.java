@@ -49,4 +49,21 @@ public class HttpUtil {
 	       
 	}
 	
+	/**
+	 *post提交键值对 
+	 *@param url
+	 *@param body
+	 *@return 
+	 *@throws IOException
+	 */
+	
+	public static String post(String url, RequestBody body) throws IOException {
+	    Request request = new Request.Builder().url(url).post(body).build();
+	    Response response = client.newCall(request).execute();
+	    if (response.isSuccessful()) {
+	        return response.body().string();
+	    } else {
+	        throw new IOException("Unexpected code " + response);
+	    }
+	}
 }
