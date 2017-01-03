@@ -14,5 +14,11 @@ public class BasicType {
 		System.out.println(ch);
 		System.out.println(ch1);
 		
+		//测试分支合并
+		System.out.println("测试分支合并");
+		
+		//1.测试分支合并合并合并
+		System.out.println("hahhaha");
+		
 	}
 }
