@@ -12,5 +12,6 @@ public class SystemProperty {
 			System.out.println(strSplit[i]);
 		}
 		
+		System.out.println("merge分支");
 	}
 }
