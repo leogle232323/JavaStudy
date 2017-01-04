@@ -1,7 +1,7 @@
 package test;
 
 public class TestMerge {
-	public static String haha;
+	public static String wuwa;
 	public String hehe;
 	
 	public static void main(String[] args){
