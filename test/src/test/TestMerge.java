@@ -6,7 +6,9 @@ public class TestMerge {
 	public static String pupu;
 	public String bubu;
 	
+	
 	public static void main(String[] args){
 		System.out.println("测试合并分支冲突");
+		String hah;
 	}
 }
