@@ -124,6 +124,18 @@ public class MapTest {
 		Map<Object, Object> eMap = Collections.emptyMap();
 //		eMap.put("haha", "heh");
 		System.out.println(eMap);
+		
+		//list排序
+		System.out.println(entryList);
+		entryList.sort(new Comparator<Entry<String,String>>(){
+
+			@Override
+			public int compare(Entry<String, String> e1, Entry<String, String> e2) {
+				return e1.getKey().compareTo(e2.getKey());
+			}
+			
+		});
+		System.out.println(entryList);
 
 	}
 }
