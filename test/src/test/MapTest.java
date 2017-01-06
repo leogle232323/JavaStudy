@@ -41,8 +41,18 @@ public class MapTest {
 		}
 		System.out.println();
 		
+		//遍历输出key
+		for(String key : m.keySet()){
+			System.out.print(key);
+		}
+		
+		//遍历输出value
+		for(String value : m.values()){
+			System.out.print(value);
+		}
+		
 		//iterator遍历map
-		System.out.println("iterator遍历map");
+		System.out.println("\niterator遍历map");
 		Iterator<Entry<String,String>> it = m.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<String, String> entry = it.next();
@@ -51,9 +61,23 @@ public class MapTest {
 		}
 		System.out.println();
 		
+		//iterator遍历key
+		System.out.println("iterator遍历key");
+		Iterator<String> itKey = m.keySet().iterator();
+		while(itKey.hasNext()){
+			System.out.print(itKey.next());
+		}
+		
+		//iterator遍历value
+		System.out.println("\niterator遍历value");
+		Iterator<String> itValue = m.values().iterator();
+		while(itValue.hasNext()){
+			System.out.print(itValue.next());
+		}
+		
 		//3.通过key对map进行排序
 		//comparator进行排序
-		System.out.println("通过key对map排序");
+		System.out.println("\n通过key对map排序");
 		System.out.println("comparator进行排序");
 		Collections.sort(entryList, new Comparator<Entry<String,String>>(){
 			
@@ -113,7 +137,7 @@ public class MapTest {
 		//6.map中的反向查询
 		
 		//7.map的复制
-		System.out.println("map的复制");
+		System.out.println("map的复制,synchronizedMap实现复制map与原map同步");
 		Map<String, String> copiedMap = Collections.synchronizedMap(m);
 		System.out.println("添加值之前\n" + copiedMap);
 		m.put("sykey", "syvalue");
