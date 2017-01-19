@@ -24,7 +24,7 @@ public class ClassTest {
 		System.out.println(t.d);//默认为0.0d
 		
 		System.out.println(System.lineSeparator() + "haha");
-		
+		System.out.print("\r");
 		//2.将属性list发送给输出流
 		System.getProperties().list(System.out);
 		

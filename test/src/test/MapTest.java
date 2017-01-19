@@ -54,8 +54,9 @@ public class MapTest {
 		//iterator遍历map
 		System.out.println("\niterator遍历map");
 		Iterator<Entry<String,String>> it = m.entrySet().iterator();
+		Entry<String,String> entry;
 		while(it.hasNext()){
-			Entry<String, String> entry = it.next();
+		    entry = it.next();
 			System.out.print(entry.getKey());
 			System.out.print(entry.getValue());
 		}
