@@ -28,19 +28,20 @@ public class PrintStackTrace {
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 		try {
 			bufferedWriter.write("This is the first line.");
-			System.out.println("Write sucess");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		//close BufferedWriter
 		try {
 			bufferedWriter.close();
+			System.out.println("Write success");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Write failed");
 			e.printStackTrace();
 		}
-		
+		//close FileWriter
 		try {
 			fileWriter.close();
 		} catch (IOException e) {
