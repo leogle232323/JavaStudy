@@ -1,5 +1,8 @@
 package test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegularExpression {
 	
 	public static void main(String[] args) {
@@ -89,12 +92,24 @@ public class RegularExpression {
 		
 		//27.greedy mode
 		String str17 = "dxxxdxxxd";
-		System.out.println("greedy mode" + str17.matches("(d)(\\w+)"));
-		System.out.println("greedy mode " + str17.matches("(d)(\\w+)(d)"));
+		Pattern p1 = Pattern.compile("(d)(\\w+)");
+		Pattern p2 = Pattern.compile("(d)(\\w+)(d)");
+		Matcher m1 = p1.matcher(str17);
+		Matcher m2 = p2.matcher(str17);
+		System.out.println(m1);
+		System.out.println("greedy mode " + m1.matches());
+		System.out.println(m2);
+		System.out.println("greedy mode " + m2.matches());
 		//28.non-greedy mode
 		String str18 = "dxxxdxxxd";
-		System.out.println("non-greedy mode " + str18.matches("(d)(\\w+?)"));
-		System.out.println("non-greedy mode " + str18.matches("(d)(\\w+?)(d)"));
+		Pattern p3 = Pattern.compile("(d)(\\w+?)");
+		Pattern p4 = Pattern.compile("(d)(\\w+?)(d)");
+		Matcher m3 = p3.matcher(str18);
+		Matcher m4 = p4.matcher(str18);
+		System.out.println(m3);
+		System.out.println("non-greedy mode " + m3.matches());
+		System.out.println(m4);
+		System.out.println("non-greedy mode " + m4.matches());
 		
 		//29.back reference
 		String str19 = "'Hello','World'";

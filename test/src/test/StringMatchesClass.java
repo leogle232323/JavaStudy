@@ -3,6 +3,8 @@ package test;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.jayway.restassured.path.json.JsonPath;
+
 public class StringMatchesClass {
 	/**
 	 *Verify if a string is type of date 
@@ -16,6 +18,7 @@ public class StringMatchesClass {
 		//Three way 
 		//1.String.matches()
 		String date = "2014-02-01";
+		System.out.println(date);
 		System.out.println(isDate(date));
 		
 		//2.Pattern.matches()
@@ -27,7 +30,7 @@ public class StringMatchesClass {
 		Matcher m = p.matcher(date);
 		boolean matcherBoolean = m.matches();
 		System.out.println(matcherBoolean);
-		
+		System.out.println(m.toMatchResult());
 
 	}
 }
