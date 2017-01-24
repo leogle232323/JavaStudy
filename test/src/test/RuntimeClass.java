@@ -6,7 +6,7 @@ public class RuntimeClass {
 
 	public static void main(String[] args) throws IOException {
 		//1.Execute external program(Call external command)
-		String cmd = "cmd /c start E:\\test.bat";
+		String cmd = "cmd /k notepad E:\\test1.txt";
 		Runtime.getRuntime().exec(cmd);
 		
 		//2.Memory management

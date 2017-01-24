@@ -11,7 +11,8 @@ public class SystemProperty {
 		for(int i = 0;i < strSplit.length;i++){
 			System.out.println(strSplit[i]);
 		}
-		
+		System.out.println(System.getProperty("java.library.path"));
+		System.out.println(System.getProperty("java.io.tmpdir"));
 		System.out.println("merge分支");
 	}
 }
