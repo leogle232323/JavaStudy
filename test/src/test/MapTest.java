@@ -161,6 +161,11 @@ public class MapTest {
 			
 		});
 		System.out.println(entryList);
+		
+		//9.map删除元素
+		m.remove("key1");
+		System.out.println(m);
+		
 
 	}
 }
