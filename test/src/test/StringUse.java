@@ -18,7 +18,7 @@ public class StringUse {
 		System.out.println(buf);
 		//4.getBytes()
 		byte b[] = s1.getBytes();
-		System.out.println(b);
+		System.out.println(b[1]);
 		//5.equals
 		System.out.println(s.equals(s1));
 		//6.equalsIgnoreCase

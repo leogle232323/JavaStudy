@@ -21,6 +21,17 @@ public class MapTest {
 		m.put("key3", "value3");
 		m.put("key0", "value0");
 		
+		//TreeMap 根据key排序
+		Map<String,String> m1 = new TreeMap<String,String>(new Comparator<String>(){
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return o1.compareTo(o2);
+			}
+			
+		});
+		
 		//key list 
 		List<String> keyList = new ArrayList<String>(m.keySet());
 		System.out.println(keyList);
@@ -78,6 +89,7 @@ public class MapTest {
 		
 		//3.通过key对map进行排序
 		//comparator进行排序
+
 		System.out.println("\n通过key对map排序");
 		System.out.println("comparator进行排序");
 		Collections.sort(entryList, new Comparator<Entry<String,String>>(){
@@ -114,6 +126,27 @@ public class MapTest {
 		m.put("bkey", "bvalue");
 		System.out.println("排序前");
 		System.out.println(m);
+		//collections   value排序
+		Collections.sort(valueList, new Comparator<String>(){
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return o1.compareTo(o2);
+			}
+			
+		});
+		//list value 排序
+		valueList.sort(new Comparator<String>(){
+
+			@Override
+			public int compare(String o1, String o2) {
+				// TODO Auto-generated method stub
+				return o1.compareTo(o2);
+			}
+			
+		});
+		
 		Collections.sort(entryList, new Comparator<Entry<String,String>>(){
 
 			@Override
