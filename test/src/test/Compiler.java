@@ -12,11 +12,17 @@ public class Compiler {
 		Map<String, String> mp = new HashMap<>();
 		mp.put("hello", "你好");
 		mp.put("haha", "哈哈");
+		mp.put("", null);
+		mp.put(null, "");
+		mp.put(null, null);
 		String str = null;
 		if (mp.containsKey(str)) {
 			System.out.println(str + "的汉语翻译是" + mp.get(str));
 		} else {
 			System.out.println("词库里没有这个单词");
 		}
+
+		System.out.println(mp.get(null));
+		System.out.println(mp.get(""));
 	}
 }
