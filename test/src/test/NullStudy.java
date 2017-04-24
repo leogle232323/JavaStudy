@@ -69,7 +69,7 @@ public class NullStudy {
 			System.out.println("isNull is not instance of Integer");
 		}
 
-		// 4.不能使用非静态方法调用值为null的引用性变量，可以使用静态方法调用值为null的引用型变量（静态方法使用
+		// 4.不能使用非静态方法调用值为null的引用型变量，可以使用静态方法调用值为null的引用型变量（静态方法使用
 		// 静态绑定）
 		try {
 			NullStudy ns = null;
@@ -82,6 +82,9 @@ public class NullStudy {
 		// 5.null比较，仅可使用==或!=操作比较null值
 		String str1 = null;
 		String str2 = null;
+		Object o1 = null;
+		Integer IN = null;
+		Boolean B = null;
 		// null == null
 		if (str1 == str2) {
 			System.out.println("null == null is true in Java!");
@@ -89,6 +92,14 @@ public class NullStudy {
 		// null != null
 		if (!(null != null)) {
 			System.out.println("null != null is false in Java!");
+		}
+		// Object null == String null
+		if (o1 == str1) {
+			System.out.println("Object null == String null is true in Java!");
+		}
+		// Object null == Boolean null
+		if (B == o1) {
+			System.out.println("Object null == Boolean null is true in Java!");
 		}
 	}
 }
