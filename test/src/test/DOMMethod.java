@@ -15,7 +15,7 @@ public class DOMMethod {
 		long lasting = System.currentTimeMillis();
 
 		try {
-			File f = new File("C:\\Users\\Administrator\\Desktop\\1.xml");
+			File f = new File("json.xml");
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(f);
