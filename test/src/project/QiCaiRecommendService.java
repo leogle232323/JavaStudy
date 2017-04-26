@@ -17,8 +17,8 @@ public class QiCaiRecommendService {
 		int count = getRecommendServiceCount();
 		int maxId = getMaxRecommendServiceId();
 
-		// 插入服务（插满10条）
-		int requireCount = 10 - count;
+		// 插入服务（插满xx条）
+		int requireCount = 15 - count;
 		if (requireCount > 0) {
 			for (int i = 0; i < requireCount; i++) {
 				String guid = getGuid();
@@ -28,7 +28,7 @@ public class QiCaiRecommendService {
 		}
 
 		// 删除最后几条服务
-		// deleteRecommendService(3);
+		// deleteRecommendService(1);
 	}
 
 	public static String getGuid() {
@@ -61,7 +61,11 @@ public class QiCaiRecommendService {
 
 	public static String getService() throws SQLException {
 		String[] strService = { "1001965490", "1001970226", "1001970227", "1001970217", "1001968199", "1001970147",
-				"1001965492", "1001970283", "1001971208", "1001971264" };
+				"1001965492", "1001970283", "1001971208", "1001971264", "1001969272", "1001969659", "1001970192",
+				"1001970279", "1001970278", "1001970277", "1001965366", "1001965493", "1001965494", "1001965398",
+				"1001968154", "1001968564", "1001970216", "1001970223", "1001970221", "1001965407", "1001965406",
+				"1001968197", "1001968198", "1001968194", "1001968200", "1001970194", "1001970196", "1001970198",
+				"1001970199" };
 		String service = null;
 		for (int i = 0; i < strService.length; i++) {
 			if (!isInRecommendServiceTable(strService[i])) {
