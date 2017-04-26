@@ -1,4 +1,4 @@
-package test;
+package project;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import tools.MySqlUtil;
 /**
  * 企业推荐服务
  */
-public class TestQiCai {
+public class QiCaiRecommendService {
 	public static void main(String[] args) throws SQLException {
 		int count = getRecommendServiceCount();
 		int maxId = getMaxRecommendServiceId();

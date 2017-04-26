@@ -1,4 +1,4 @@
-package test;
+package project;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ public class QiCaiSpecialService {
 			int id = maxId + i + 1;
 			for (int j = 0; j < service.size(); j++) {
 				if (!isInIndustryServiceTable(industryId, service.get(j))) {
-					insertService(id, TestQiCai.getGuid(), industryId, service.get(j));
+					insertService(id, QiCaiRecommendService.getGuid(), industryId, service.get(j));
 					break;
 
 				}
