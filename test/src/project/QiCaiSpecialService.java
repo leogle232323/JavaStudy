@@ -14,36 +14,27 @@ import tools.MySqlUtil;
  */
 public class QiCaiSpecialService {
 	public static void main(String[] args) throws SQLException {
-		// int count = 10;
-		// int industryId = getUserIndustryId("18");
-		// List<String> service = getTianPengService();
-		// int maxId = getMaxId();
-		// for (int i = 0; i < count; i++) {
-		// int id = maxId + i + 1;
-		// for (int j = 0; j < service.size(); j++) {
-		// if (!isInIndustryServiceTable(industryId, service.get(j))) {
-		// insertService(id, QiCaiRecommendService.getGuid(), industryId,
-		// service.get(j));
-		// break;
-		//
-		// }
-		// }
-		// }
-
-		int count = 30;
-		int industryId = getUserIndustryId("18");
+		int count = 1;
+		String userId = "23569494";
+		int industryId = getUserIndustryId(userId);
 		// List<String> service = getTianPengService();
 		List<String> service = getService();
 		int maxId = getMaxId();
 		int indexCount = 0;
-		for (int i = 0; i < service.size(); i++) {
-			int id = maxId + indexCount + 1;
-			if (!isInIndustryServiceTable(industryId, service.get(i))) {
-				insertService(id, QiCaiRecommendService.getGuid(), industryId, service.get(i));
-				indexCount++;
+		if (industryId != 0) {
+			for (int i = 0; i < service.size(); i++) {
+				int id = maxId + indexCount + 1;
+				if (!isInIndustryServiceTable(industryId, service.get(i))) {
+					insertService(id, QiCaiRecommendService.getGuid(), industryId, service.get(i));
+					indexCount++;
+				}
+				if (indexCount >= count) {
+					break;
+				}
 			}
-			if (indexCount >= count) {
-				break;
+		} else {
+			if (isUserIdExist(userId)) {
+				System.out.println("用户id：" + userId + "无关联行业类目");
 			}
 		}
 
@@ -84,13 +75,12 @@ public class QiCaiSpecialService {
 				"1001970279", "1001970278", "1001970277", "1001965366", "1001965493", "1001965494", "1001965398",
 				"1001968154", "1001968564", "1001970216", "1001970223", "1001970221", "1001965407", "1001965406",
 				"1001968197", "1001968198", "1001968194", "1001968200", "1001970194", "1001970196", "1001970198",
-				"1001970199" };
+				"1001970199", "1001970201", "1001970202", "1001970204", "1001970189", "1001970190", "1001970224",
+				"1001970225", "1001970230", "1001970231", "1001970228" };
 		return Arrays.asList(strService);
 	}
 
 	public static void insertService(int id, String guid, int industryId, String serviceId) throws SQLException {
-		// Random ran = new Random();
-		// int sequence = ran.nextInt(1000);
 		String sql = "INSERT INTO zhubajie_qicai.qc_industry_service(`id`, `create_guid`, `create_time`, `update_time`, `industry_id`, `service_id`, `sequence`, `manager_id`, `manager_name`) VALUES("
 				+ id + ",'" + guid + "',SYSDATE(),SYSDATE()," + industryId + ",'" + serviceId + "',NULL,'55','王露')";
 		System.out.println(sql);
@@ -122,13 +112,29 @@ public class QiCaiSpecialService {
 	}
 
 	public static int getUserIndustryId(String userId) throws SQLException {
-		MySqlUtil sqlUtil = getSqlUitl();
-		String sql = "SELECT com_industry FROM zhubajie_ecrm.ec_employer_info where user_id = " + userId;
-		ResultSet result = sqlUtil.Query(sql);
-		while (result.next()) {
-			return result.getInt("com_industry");
+		if (isUserIdExist(userId)) {
+			MySqlUtil sqlUtil = getSqlUitl();
+			String sql = "SELECT com_industry FROM zhubajie_ecrm.ec_employer_info where user_id = " + userId;
+			ResultSet result = sqlUtil.Query(sql);
+			while (result.next()) {
+				return result.getInt("com_industry");
+			}
+		} else {
+			System.out.println("用户id：" + userId + "不存在！");
 		}
 		return 0;
+	}
+
+	public static boolean isUserIdExist(String userId) throws SQLException {
+		MySqlUtil sqlUtil = getSqlUitl();
+		String sql = "SELECT COUNT(*) AS COUNT FROM zhubajie_member.mb_account WHERE user_id = " + userId;
+		ResultSet result = sqlUtil.Query(sql);
+		while (result.next()) {
+			if (result.getInt("count") > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static MySqlUtil getSqlUitl() {
