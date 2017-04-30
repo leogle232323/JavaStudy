@@ -14,18 +14,38 @@ import tools.MySqlUtil;
  */
 public class QiCaiSpecialService {
 	public static void main(String[] args) throws SQLException {
-		int count = 1;
+		int count = 20;
 		String userId = "23569494";
 		int industryId = getUserIndustryId(userId);
 		// List<String> service = getTianPengService();
 		List<String> service = getService();
-		int maxId = getMaxId();
 		int indexCount = 0;
-		if (industryId != 0) {
+
+		// 1.为每个行业都插入数据
+		// for (int in = 1; in < 13; in++) {
+		// if (in > 0) {
+		// for (int i = 0; i < service.size(); i++) {
+		// if (!isInIndustryServiceTable(in, service.get(i))) {
+		// insertService(QiCaiRecommendService.getGuid(), in, service.get(i));
+		// indexCount++;
+		// }
+		// if (indexCount >= (count + in)) {
+		// indexCount = 0;
+		// break;
+		// }
+		// }
+		// } else {
+		// if (isUserIdExist(userId)) {
+		// System.out.println("用户id：" + userId + "无关联行业类目");
+		// }
+		// }
+		// }
+
+		// 2.为单个行业插入数据
+		if (industryId > 0) {
 			for (int i = 0; i < service.size(); i++) {
-				int id = maxId + indexCount + 1;
 				if (!isInIndustryServiceTable(industryId, service.get(i))) {
-					insertService(id, QiCaiRecommendService.getGuid(), industryId, service.get(i));
+					insertService(QiCaiRecommendService.getGuid(), industryId, service.get(i));
 					indexCount++;
 				}
 				if (indexCount >= count) {
@@ -38,13 +58,28 @@ public class QiCaiSpecialService {
 			}
 		}
 
-		// 删除行业专属服务
-		// deleteIndustryService(1);
+		// 3.删除id大于固定值的行业服务
+		// int id = 1;
+		// deleteAllIndustryService(id);
+
+		// 4.删除单个行业下的所有服务
+		// int singleIndustryId = 1;
+		// deleteSingleIndustryService(singleIndustryId);
 	}
 
 	public static String getGuid() {
 		UUID uuid = UUID.randomUUID();
 		return uuid.toString();
+	}
+
+	public static boolean isTianPengService(String serviceId) throws SQLException {
+		List<String> tianPengService = getTianPengService();
+		for (int i = 0; i < tianPengService.size(); i++) {
+			if (tianPengService.get(i).equals(serviceId)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static List<String> getTianPengService() throws SQLException {
@@ -70,19 +105,19 @@ public class QiCaiSpecialService {
 	}
 
 	public static List<String> getService() throws SQLException {
-		String[] strService = { "1001965490", "1001970226", "1001970227", "1001970217", "1001968199", "1001970147",
-				"1001965492", "1001970283", "1001971208", "1001971264", "1001969272", "1001969659", "1001970192",
-				"1001970279", "1001970278", "1001970277", "1001965366", "1001965493", "1001965494", "1001965398",
-				"1001968154", "1001968564", "1001970216", "1001970223", "1001970221", "1001965407", "1001965406",
-				"1001968197", "1001968198", "1001968194", "1001968200", "1001970194", "1001970196", "1001970198",
-				"1001970199", "1001970201", "1001970202", "1001970204", "1001970189", "1001970190", "1001970224",
-				"1001970225", "1001970230", "1001970231", "1001970228" };
+		String[] strService = { "1001968349", "1001965490", "1001970226", "1001970227", "1001970217", "1001968199",
+				"1001970147", "1001965492", "1001970283", "1001971208", "1001971264", "1001969272", "1001969659",
+				"1001970192", "1001970279", "1001970278", "1001970277", "1001965366", "1001965493", "1001965494",
+				"1001965398", "1001968154", "1001968564", "1001970216", "1001970223", "1001970221", "1001965407",
+				"1001965406", "1001968197", "1001968198", "1001968194", "1001968200", "1001970194", "1001970196",
+				"1001970198", "1001970199", "1001970201", "1001970202", "1001970204", "1001970189", "1001970190",
+				"1001970224", "1001970225", "1001970230", "1001970231", "1001970228" };
 		return Arrays.asList(strService);
 	}
 
-	public static void insertService(int id, String guid, int industryId, String serviceId) throws SQLException {
-		String sql = "INSERT INTO zhubajie_qicai.qc_industry_service(`id`, `create_guid`, `create_time`, `update_time`, `industry_id`, `service_id`, `sequence`, `manager_id`, `manager_name`) VALUES("
-				+ id + ",'" + guid + "',SYSDATE(),SYSDATE()," + industryId + ",'" + serviceId + "',NULL,'55','王露')";
+	public static void insertService(String guid, int industryId, String serviceId) throws SQLException {
+		String sql = "INSERT INTO zhubajie_qicai.qc_industry_service(`id`, `create_guid`, `create_time`, `update_time`, `industry_id`, `service_id`, `sequence`, `manager_id`, `manager_name`)  VALUES(NULL,'"
+				+ guid + "',SYSDATE(),SYSDATE()," + industryId + ",'" + serviceId + "',NULL,'55','王露')";
 		System.out.println(sql);
 		MySqlUtil sqlUtil = getSqlUitl();
 		sqlUtil.insert(sql);
@@ -103,9 +138,17 @@ public class QiCaiSpecialService {
 		return false;
 	}
 
-	public static void deleteIndustryService(int id) throws SQLException {
+	public static void deleteAllIndustryService(int id) throws SQLException {
 		MySqlUtil sqlUtil = getSqlUitl();
 		String sql = "DELETE FROM zhubajie_qicai.qc_industry_service where id > " + id;
+		System.out.println(sql);
+		sqlUtil.delete(sql);
+		sqlUtil.Close();
+	}
+
+	public static void deleteSingleIndustryService(int industry_id) throws SQLException {
+		MySqlUtil sqlUtil = getSqlUitl();
+		String sql = "DELETE FROM zhubajie_qicai.qc_industry_service where industry_id = " + industry_id;
 		System.out.println(sql);
 		sqlUtil.delete(sql);
 		sqlUtil.Close();
@@ -138,7 +181,7 @@ public class QiCaiSpecialService {
 	}
 
 	public static MySqlUtil getSqlUitl() {
-		MySqlUtil sqlUtil = new MySqlUtil("172.20.20.104", "root", "zhubajie");
+		MySqlUtil sqlUtil = new MySqlUtil("172.20.20.104:3306", "root", "zhubajie");
 		sqlUtil.Connect();
 		return sqlUtil;
 	}

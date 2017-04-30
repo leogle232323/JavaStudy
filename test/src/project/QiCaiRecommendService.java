@@ -18,7 +18,7 @@ public class QiCaiRecommendService {
 		int maxId = getMaxRecommendServiceId();
 
 		// 插入服务（插满xx条）
-		int requireCount = 15 - count;
+		int requireCount = 8 - count;
 		if (requireCount > 0) {
 			for (int i = 0; i < requireCount; i++) {
 				String guid = getGuid();
