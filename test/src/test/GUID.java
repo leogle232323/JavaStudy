@@ -11,4 +11,9 @@ public class GUID {
 		UUID uuid = UUID.randomUUID();
 		System.out.println(uuid.toString());
 	}
+
+	public static String getGuid() {
+		UUID uuid = UUID.randomUUID();
+		return uuid.toString();
+	}
 }

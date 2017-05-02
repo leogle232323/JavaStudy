@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import test.GUID;
 import tools.MySqlUtil;
 
 /**
@@ -20,13 +21,12 @@ public class QiCaiSpecialService {
 		// List<String> service = getTianPengService();
 		List<String> service = getService();
 		int indexCount = 0;
-
 		// 1.为每个行业都插入数据
-		// for (int in = 1; in < 13; in++) {
+		// for (int in = 13; in < 18; in++) {
 		// if (in > 0) {
 		// for (int i = 0; i < service.size(); i++) {
 		// if (!isInIndustryServiceTable(in, service.get(i))) {
-		// insertService(QiCaiRecommendService.getGuid(), in, service.get(i));
+		// insertService(in, service.get(i));
 		// indexCount++;
 		// }
 		// if (indexCount >= (count + in)) {
@@ -42,21 +42,21 @@ public class QiCaiSpecialService {
 		// }
 
 		// 2.为单个行业插入数据
-		if (industryId > 0) {
-			for (int i = 0; i < service.size(); i++) {
-				if (!isInIndustryServiceTable(industryId, service.get(i))) {
-					insertService(QiCaiRecommendService.getGuid(), industryId, service.get(i));
-					indexCount++;
-				}
-				if (indexCount >= count) {
-					break;
-				}
-			}
-		} else {
-			if (isUserIdExist(userId)) {
-				System.out.println("用户id：" + userId + "无关联行业类目");
-			}
-		}
+		// if ((industryId = 99) > 0) {
+		// for (int i = 0; i < service.size(); i++) {
+		// if (!isInIndustryServiceTable(industryId, service.get(i))) {
+		// insertService(industryId, service.get(i));
+		// indexCount++;
+		// }
+		// if (indexCount >= count) {
+		// break;
+		// }
+		// }
+		// } else {
+		// if (isUserIdExist(userId)) {
+		// System.out.println("用户id：" + userId + "无关联行业类目");
+		// }
+		// }
 
 		// 3.删除id大于固定值的行业服务
 		// int id = 1;
@@ -64,7 +64,7 @@ public class QiCaiSpecialService {
 
 		// 4.删除单个行业下的所有服务
 		// int singleIndustryId = 1;
-		// deleteSingleIndustryService(singleIndustryId);
+		// deleteSingleIndustryService(industryId);
 	}
 
 	public static String getGuid() {
@@ -101,6 +101,7 @@ public class QiCaiSpecialService {
 		while (result.next()) {
 			return result.getInt("id");
 		}
+		sqlUtil.Close();
 		return 0;
 	}
 
@@ -115,13 +116,14 @@ public class QiCaiSpecialService {
 		return Arrays.asList(strService);
 	}
 
-	public static void insertService(String guid, int industryId, String serviceId) throws SQLException {
+	public static boolean insertService(int industryId, String serviceId) throws SQLException {
 		String sql = "INSERT INTO zhubajie_qicai.qc_industry_service(`id`, `create_guid`, `create_time`, `update_time`, `industry_id`, `service_id`, `sequence`, `manager_id`, `manager_name`)  VALUES(NULL,'"
-				+ guid + "',SYSDATE(),SYSDATE()," + industryId + ",'" + serviceId + "',NULL,'55','王露')";
+				+ GUID.getGuid() + "',SYSDATE(),SYSDATE()," + industryId + ",'" + serviceId + "',NULL,'55','肖阳')";
 		System.out.println(sql);
 		MySqlUtil sqlUtil = getSqlUitl();
-		sqlUtil.insert(sql);
+		boolean isInserted = sqlUtil.insert(sql);
 		sqlUtil.Close();
+		return isInserted;
 	}
 
 	public static boolean isInIndustryServiceTable(int industryId, String serviceId) throws SQLException {
@@ -138,26 +140,28 @@ public class QiCaiSpecialService {
 		return false;
 	}
 
-	public static void deleteAllIndustryService(int id) throws SQLException {
+	public static boolean deleteAllIndustryService(int id) throws SQLException {
 		MySqlUtil sqlUtil = getSqlUitl();
 		String sql = "DELETE FROM zhubajie_qicai.qc_industry_service where id > " + id;
 		System.out.println(sql);
-		sqlUtil.delete(sql);
+		boolean isDeleted = sqlUtil.delete(sql);
 		sqlUtil.Close();
+		return isDeleted;
 	}
 
-	public static void deleteSingleIndustryService(int industry_id) throws SQLException {
+	public static boolean deleteSingleIndustryService(int industry_id) throws SQLException {
 		MySqlUtil sqlUtil = getSqlUitl();
 		String sql = "DELETE FROM zhubajie_qicai.qc_industry_service where industry_id = " + industry_id;
 		System.out.println(sql);
-		sqlUtil.delete(sql);
+		boolean isDeleted = sqlUtil.delete(sql);
 		sqlUtil.Close();
+		return isDeleted;
 	}
 
 	public static int getUserIndustryId(String userId) throws SQLException {
+		MySqlUtil sqlUtil = getSqlUitl();
+		String sql = "SELECT com_industry FROM zhubajie_ecrm.ec_employer_info where user_id = " + userId;
 		if (isUserIdExist(userId)) {
-			MySqlUtil sqlUtil = getSqlUitl();
-			String sql = "SELECT com_industry FROM zhubajie_ecrm.ec_employer_info where user_id = " + userId;
 			ResultSet result = sqlUtil.Query(sql);
 			while (result.next()) {
 				return result.getInt("com_industry");
@@ -165,6 +169,7 @@ public class QiCaiSpecialService {
 		} else {
 			System.out.println("用户id：" + userId + "不存在！");
 		}
+		sqlUtil.Close();
 		return 0;
 	}
 
@@ -177,6 +182,7 @@ public class QiCaiSpecialService {
 				return true;
 			}
 		}
+		sqlUtil.Close();
 		return false;
 	}
 
