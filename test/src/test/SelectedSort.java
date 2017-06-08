@@ -7,15 +7,50 @@ package test;
 public class SelectedSort {
 
 	public static void main(String[] args) {
+		selectedSort1();
+		selectedSort2();
+	}
+
+	public static void selectedSort1() {
+		int[] arr = { 23, 45, 67, 12, 35, 78, 3, 57, 0, 45 };
+		int count = 0;
+		int compare = 0;
+		for (int i = 0; i < arr.length - 1; i++) {
+			for (int j = i + 1; j < arr.length; j++) {
+				if (arr[i] > arr[j]) {
+					int tmp = arr[j];
+					arr[j] = arr[i];
+					arr[i] = tmp;
+					count++;
+					compare++;
+				} else {
+					compare++;
+				}
+			}
+		}
+		for (int j = 0; j < arr.length; j++) {
+			System.out.print(arr[j] + " ");
+		}
+		System.out.println("\n交换" + count + "次");
+		System.out.println("比较" + compare + "次");
+	}
+
+	public static void selectedSort2() {
 		int[] numbers = { 23, 45, 67, 12, 35, 78, 3, 57, 0, 45 };
 		int size = numbers.length;
 		int temp = 0;
 		int count = 0;
+		int compare = 0;
 		for (int i = 0; i < size; i++) {
 			int k = i;
 			for (int j = size - 1; j > i; j--) {
-				if (numbers[j] < numbers[k])
+				if (numbers[j] < numbers[k]) {
 					k = j;
+					compare++;
+				} else {
+					compare++;
+				}
+
 			}
 			temp = numbers[i];
 			numbers[i] = numbers[k];
@@ -28,6 +63,6 @@ public class SelectedSort {
 		}
 
 		System.out.println("\n交换" + count + "次");
+		System.out.println("比较" + compare + "次");
 	}
-
 }
