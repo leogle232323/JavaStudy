@@ -11,8 +11,13 @@ public class SelectedSort {
 		selectedSort2();
 	}
 
+	/**
+	 * 选择排序：第一个元素与其后所有元素作比较，选出最小值，放在第一个位置；第二个元素与其后所有元素作比较，选出最小值，放在
+	 * 第二个位置...第N-1个元素与其后所有元素作比较，选出最小值，放在第（N-1）个位置
+	 * 
+	 */
 	public static void selectedSort1() {
-		int[] arr = { 23, 45, 67, 12, 35, 78, 3, 57, 0, 45 };
+		int[] arr = { 23, 45, 67, 12, 35, 78, 3, 57, 0, 45, 1, 5, 33, 5, -1, 99, -666 };
 		int count = 0;
 		int compare = 0;
 		for (int i = 0; i < arr.length - 1; i++) {
@@ -35,15 +40,20 @@ public class SelectedSort {
 		System.out.println("比较" + compare + "次");
 	}
 
+	/**
+	 * 选择排序：第一个元素与其后所有元素作比较，选出最小值，放在第一个位置；第二个元素与其后所有元素作比较，选出最小值，放在
+	 * 第二个位置...第N-1个元素与其后所有元素作比较，选出最小值，放在第（N-1）个位置。此方法交换次数比较少
+	 * 
+	 */
 	public static void selectedSort2() {
-		int[] numbers = { 23, 45, 67, 12, 35, 78, 3, 57, 0, 45 };
+		int[] numbers = { 23, 45, 67, 12, 35, 78, 3, 57, 0, 45, 1, 5, 33, 5, -1, 99, -666 };
 		int size = numbers.length;
 		int temp = 0;
 		int count = 0;
 		int compare = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size - 1; i++) {
 			int k = i;
-			for (int j = size - 1; j > i; j--) {
+			for (int j = i + 1; j < size; j++) {
 				if (numbers[j] < numbers[k]) {
 					k = j;
 					compare++;
