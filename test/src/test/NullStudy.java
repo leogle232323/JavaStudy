@@ -46,13 +46,22 @@ public class NullStudy {
 				// 规避代码
 				// if (mp.get(in) instanceof Integer) {
 				// int count = mp.get(in);
-				// mp.put(in, count++);
+				// mp.put(in, ++count);
+				// } else {
+				// mp.put(in, 1);
 				// }
 				// 正确方法
-				if (mp.get(in) == null) {
-					mp.put(in, 1);
-				} else {
+				// if (mp.get(in) == null) {
+				// mp.put(in, 1);
+				// } else {
+				// mp.put(in, mp.get(in) + 1);
+				// }
+
+				// containsKey方法
+				if (mp.containsKey(in)) {
 					mp.put(in, mp.get(in) + 1);
+				} else {
+					mp.put(in, 1);
 				}
 			}
 		} catch (Exception e) {
@@ -73,7 +82,7 @@ public class NullStudy {
 		// 静态绑定）
 		try {
 			NullStudy ns = null;
-			ns.iAmStaticMethod();
+			ns.iAmStaticMethod();// 静态方法调用null引用
 			ns.iAmNonStaticMethod();// 非静态方法调用null引用
 		} catch (Exception e) {
 			System.out.println("4.使用非静态方法调用值为null的引用型变量报错，空指针异常！");

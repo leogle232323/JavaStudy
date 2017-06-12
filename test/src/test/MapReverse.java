@@ -33,6 +33,6 @@ public class MapReverse {
 		m.put("key4", "value1");
 
 		MapReverse ms = new MapReverse(m);
-		System.out.println((ms.getKey("value1").toArray())[0].toString());
+		System.out.println(ms.getKey("value1").toArray()[0].toString());
 	}
 }
