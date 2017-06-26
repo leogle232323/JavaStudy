@@ -11,7 +11,7 @@ public class TianPengApp {
 	static OkHttpClient client = new OkHttpClient.Builder().build();
 
 	public static void main(String[] args) throws IOException {
-		Utils.setProxy();
+		// Utils.setProxy();
 		System.out.println(getFavoriteService("23569494"));
 		System.out.println(getFavoriteShop("23569494"));
 	}

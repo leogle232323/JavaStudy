@@ -18,7 +18,7 @@ public class HttpUtil {
 	public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
 	/**
-	 * get请求
+	 * get请求，请求不带投标参数
 	 * 
 	 * @param url
 	 * @return
