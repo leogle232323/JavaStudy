@@ -10,14 +10,13 @@ import java.util.Set;
 
 import tools.MySqlUtil;
 
-public class PackageService {
+public class PackgeServiceStage {
 
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
 
-		int package_id = 28;// 套餐id
-		// int[] standardArray = getStandardUsable(3);// 标品id
-		int[] standardArray = { 456, 461 };
+		int package_id = 8;// 套餐id
+		int[] standardArray = getStandardUsable(10);// 标品id
 
 		// 1.插入套餐、标品
 		for (int i = 0; i < standardArray.length; i++) {
@@ -47,7 +46,7 @@ public class PackageService {
 	public static void packageWithSpu(int package_id, int standard_id) throws SQLException {
 		String sql = "INSERT INTO zhubajie_shop.sp_service_spu_pack_re (`package_id`, `standard_id`, `create_time`, `create_date`, `update_time`, `user_id`, `user_name`) VALUES("
 				+ package_id + "," + standard_id + ",UNIX_TIMESTAMP(NOW()),CURDATE(),NOW(),NULL,NULL)";
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		if (!isPackageSpuExist(package_id, standard_id)) {
 			if (sqlUtil.insert(sql)) {
 				System.out.println("套餐id：" + package_id + " 标品id：" + standard_id + "插入成功");
@@ -63,7 +62,7 @@ public class PackageService {
 	public static void spuWithProvider(int standard_id, int provider_id) throws SQLException {
 		String sql = "INSERT INTO zhubajie_shop.sp_service_spu_pack_user_re (`standard_id`, `user_id`, `create_time`, `create_date`, `update_time`)  VALUES("
 				+ standard_id + "," + provider_id + ",UNIX_TIMESTAMP(NOW()),CURDATE(),NOW())";
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		if (!isSpuWithProvederExist(standard_id, provider_id)) {
 			if (sqlUtil.insert(sql)) {
 				System.out.println("标品id：" + standard_id + " 服务商id：" + provider_id + "插入成功！");
@@ -78,7 +77,7 @@ public class PackageService {
 	public static boolean isPackageSpuExist(int package_id, int standard_id) throws SQLException {
 		String sql = "SELECT standard_id FROM zhubajie_shop.sp_service_spu_pack_re WHERE package_id = " + package_id
 				+ " and standard_id = " + standard_id;
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 		while (result.next()) {
 			if (result.getInt("standard_id") != 0) {
@@ -94,7 +93,7 @@ public class PackageService {
 	public static boolean isSpuWithProvederExist(int standard_id, int provider_id) throws SQLException {
 		String sql = "SELECT user_id FROM zhubajie_shop.sp_service_spu_pack_user_re WHERE standard_id = " + standard_id
 				+ " AND user_id = " + provider_id;
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 
 		while (result.next()) {
@@ -110,7 +109,7 @@ public class PackageService {
 	public static boolean isSpuExist(int standard_id) throws SQLException {
 		String sql = "SELECT standard_id FROM zhubajie_shop.sp_service_spu_pack_user_re WHERE standard_id = "
 				+ standard_id;
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 
 		while (result.next()) {
@@ -125,7 +124,7 @@ public class PackageService {
 	// 4.2判断标品id是否已经存在于套餐表
 	public static boolean isSpuInPackage(int standard_id) throws SQLException {
 		String sql = "SELECT standard_id FROM zhubajie_shop.sp_service_spu_pack_re WHERE standard_id = " + standard_id;
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 
 		while (result.next()) {
@@ -141,7 +140,7 @@ public class PackageService {
 	public static Map<Integer, Set<Integer>> getStandardIdUsable() throws SQLException {
 		Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
 		String sql = "SELECT standard_id,user_id FROM  zhubajie_shop.sp_service_enlist WHERE TYPE = 2 AND audit_status = 2 AND service_id != 0";
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 		while (result.next()) {
 			int standard_id = result.getInt("standard_id");
@@ -166,7 +165,7 @@ public class PackageService {
 	public static Set<Integer> getStandardIdOfPackage(int package_id) throws SQLException {
 		Set<Integer> standardSet = new HashSet<>();
 		String sql = "SELECT standard_id FROM zhubajie_shop.sp_service_spu_pack_re WHERE package_id = " + package_id;
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 		while (result.next()) {
 			standardSet.add(result.getInt("standard_id"));
@@ -179,7 +178,7 @@ public class PackageService {
 	public static Set<Integer> getProviderOfStandard(int standard_id) throws SQLException {
 		Set<Integer> providerSet = new HashSet<>();
 		String sql = "SELECT user_id FROM zhubajie_shop.sp_service_spu_pack_user_re WHERE standard_id = " + standard_id;
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 		while (result.next()) {
 			providerSet.add(result.getInt("user_id"));
@@ -192,7 +191,7 @@ public class PackageService {
 	public static int[] getStandardUsable(int num) throws SQLException {
 		int[] standardArray = new int[num];
 		String sql = "SELECT standard_id FROM zhubajie_shop.sp_service_enlist WHERE TYPE = 2 AND service_id != 0 AND audit_status = 2 group by standard_id";
-		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseTest();
+		MySqlUtil sqlUtil = ConnectToDataBase.getSqlUtilDataBaseM2();
 		ResultSet result = sqlUtil.Query(sql);
 		int n = 0;
 		while (result.next()) {
