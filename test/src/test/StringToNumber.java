@@ -11,16 +11,15 @@ public class StringToNumber {
 
 		// 3.int to string
 		String s = Integer.toString(a);
-		// 4.Integer to string
-		String s1 = Integer.toString(b);
-		System.out.println(s + ":" + s1);
-
-		// 5.int to Integer
+		// 4.int to Integer
 		Integer c = Integer.valueOf(a);
+		System.out.println(s + ":" + c);
+
+		// 5.Integer to string
+		String s1 = Integer.toString(b);
 		// 6.Integer to int
 		int d = b;
-		System.out.println(c + ":" + d);
+		System.out.println(s1 + ":" + d);
 
 	}
-
 }

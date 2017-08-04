@@ -36,7 +36,7 @@ public class MathStudy {
 			System.out.println(entry.getKey() + ":" + entry.getValue());
 		}
 
-		// 2.set与list结合计数
+		// set与list结合计数
 		Set<Integer> set = new HashSet<>(list);
 		System.out.println("list与set计数");
 		for (int value : set) {

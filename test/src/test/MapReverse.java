@@ -15,14 +15,15 @@ public class MapReverse {
 		this.map = map;
 	}
 
+	// 获取map中指定value的key
 	public ArrayList<Object> getKey(Object value) {
-		ArrayList<Object> all = new ArrayList<Object>();
+		ArrayList<Object> keyList = new ArrayList<Object>();
 		for (Entry<Object, Object> entry : map.entrySet()) {
 			if (entry.getValue().equals(value)) {
-				all.add(entry.getKey());
+				keyList.add(entry.getKey());
 			}
 		}
-		return all;
+		return keyList;
 	}
 
 	public static void main(String[] args) {
@@ -33,6 +34,6 @@ public class MapReverse {
 		m.put("key4", "value1");
 
 		MapReverse ms = new MapReverse(m);
-		System.out.println(ms.getKey("value1").toArray()[0].toString());
+		System.out.println(ms.getKey("value1").toArray()[1]);
 	}
 }

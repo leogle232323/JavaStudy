@@ -18,7 +18,7 @@ public class HttpUtil {
 	public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
 	/**
-	 * get请求，请求不带投标参数
+	 * get请求，不带headers参数
 	 * 
 	 * @param url
 	 * @return
@@ -35,7 +35,7 @@ public class HttpUtil {
 	}
 
 	/**
-	 * get请求，请求带头部参数
+	 * get请求，带headers参数
 	 * 
 	 * @param url
 	 * @param headers
@@ -85,7 +85,34 @@ public class HttpUtil {
 	 */
 	public static String post(String url, String json) throws IOException {
 		RequestBody body = RequestBody.create(JSON, json);
-		Request request = new Request.Builder().url(url).post(body).build();
+		Builder builder = new Builder();
+		Request request = builder.url(url).post(body).build();
+		Response response = client.newCall(request).execute();
+
+		if (response.isSuccessful()) {
+			return response.body().string();
+		} else {
+			throw new IOException("Unexpected code " + response);
+		}
+
+	}
+
+	/**
+	 * post提交Json数据，带headers参数
+	 * 
+	 * @param url
+	 * @param json
+	 * @return
+	 * @throws IOException
+	 */
+	public static String post(String url, String json, Map<String, String> headers) throws IOException {
+		Builder builder = new Builder();
+		for (String key : headers.keySet()) {
+			builder.addHeader(key, headers.get(key));
+		}
+
+		RequestBody body = RequestBody.create(JSON, json);
+		Request request = builder.url(url).post(body).build();
 		Response response = client.newCall(request).execute();
 
 		if (response.isSuccessful()) {

@@ -29,7 +29,7 @@ public class TwoDimentionalArray {
 			System.out.println();
 		}
 
-		// for循环按列输出二维数组
+		// for循环遍历输出二维数组
 		for (int j = 0; j < arr[0].length; j++) {
 			for (int i = 0; i < arr.length; i++) {
 				System.out.print(arr[i][j]);

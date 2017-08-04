@@ -11,7 +11,7 @@ public class NullStudy {
 	}
 
 	private void iAmNonStaticMethod() {
-		System.out.println("I am non static method, don't date to call me bu null!");
+		System.out.println("I am non static method, don't date to call me by null!");
 	}
 
 	public static void main(String[] args) {
@@ -78,8 +78,7 @@ public class NullStudy {
 			System.out.println("isNull is not instance of Integer");
 		}
 
-		// 4.不能使用非静态方法调用值为null的引用型变量，可以使用静态方法调用值为null的引用型变量（静态方法使用
-		// 静态绑定）
+		// 4.值为null的引用型变量可以调用静态方法，不能调用非静态方法（静态方法使用静态绑定）
 		try {
 			NullStudy ns = null;
 			ns.iAmStaticMethod();// 静态方法调用null引用

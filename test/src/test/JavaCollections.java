@@ -36,6 +36,7 @@ public class JavaCollections {
 			System.out.println(word + ":" + Collections.frequency(list, word));
 		}
 
+		System.out.println(Collections.frequency(list, "a"));
 	}
 
 }

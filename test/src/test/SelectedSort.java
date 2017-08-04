@@ -62,10 +62,14 @@ public class SelectedSort {
 				}
 
 			}
-			temp = numbers[i];
-			numbers[i] = numbers[k];
-			numbers[k] = temp;
-			count++;
+
+			if (k != i) {
+				temp = numbers[i];
+				numbers[i] = numbers[k];
+				numbers[k] = temp;
+				count++;
+			}
+
 		}
 
 		for (int j = 0; j < numbers.length; j++) {

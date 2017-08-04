@@ -9,13 +9,11 @@ public class GUID {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		List<String> list = new ArrayList<>();
 		for (int i = 0; i < 1000; i++) {
-			UUID uuid = UUID.randomUUID();
-			list.add(uuid.toString());
+			list.add(getGuid());
 		}
-
+		System.out.println(list);
 	}
 
 	public static String getGuid() {

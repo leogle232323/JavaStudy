@@ -1,40 +1,26 @@
 package test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
+import com.jayway.restassured.path.json.JsonPath;
+
 import tools.HttpUtil;
 
 public class JsonPathProject {
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException {
-		// String url1 = "http://wxfws.zbj.com/seller/user/login";
-		// JSONObject para1 = new JSONObject();
-		// para1.put("jpcode",
-		// "c2yn2%2Fb%2FR4p91%2BOCKEFLBkW%2BRcoRyFSS%2B%2BRqHR35THMIdjtmUCj6cMRYDULSm1iMp3epWVnmSEFW3F4z9eXNMchIS7EsqzGP3Uc%2FjI30FYE%3D");
-		// para1.put("dk","eyJpbWVpIjoiNzZDMjRGQjMtNTg3MC00NUUwLUI2MEItMjVEMUUwNzRCRDQ1IiwicGhvbmVfb3NfdmVyc2lvbiI6IjEwLjAuMSIsImNsaWVudF90eXBlIjoiMyIsImNsaWVudF92ZXJzaW9uIjoiNC4yLjQiLCJzb2Z0X2Zyb20iOiJhcHBsZS5jb20iLCJkZXZpY2Vfa2V5IjoiOGQ5NDlmNmFlZjY2ZWYyYWIzY2NlNzFhYmFhYmMxNzY3MGExMzg5MmYxNDhkMDQ1ZThkZmE2YWFjZDZjYjZlYyIsInBob25lX3R5cGUiOiIyIn0=");
-		//
-		// String json = HttpUtil.post(url1, para1.toJSONString());
-		// System.out.println(json);
-		//
-		// JsonPath jp = new JsonPath(json);
-		// System.out.println(jp.getInt("errCode"));
-		// System.out.println(jp.getString("errMsg"));
-		// System.out.println(jp.getMap("data").get("token"));
+		String url1 = "http://m.zbj.com/user/getUserInfoCenterTask?page=1&size=10&product=3&status=0";
+		Map<String, String> header = new HashMap<>();
+		header.put("Cookie",
+				"userkey=ro29QSm2fuvj6igOrbzS%2FCqsatIJuB7AwwTBiKqvDOaCfhAx3OAPJpeusXdeSjZ27TJXbxcc4ixtvjzeMKkO8jQcg3UYnzncu4AGNBw8JsiJPDAh0BM4WyvHFZukgKNBCmr1EpOFkwzxcl5n7ug8JR4C4oGsRMlqZf96Ezdm9qL9jh%2BvUcpMdDasef8f4zet3A7ggfAlHVcuOPYQfO9AUT9xlxhWZjAUNnd3%2BXlSnRYLoKfdWYla5fwMJEQGDJ1YX7QEVXMo8TtwkWxu8Ik7Jll2%2FCU8AJJuaOm%2FpfbAY%2FnHF6bDGR1gG4RJTsinSOPC48Aqm1H58Quwmuwk");
 
-		// RequestBody body = new FormEncodingBuilder().add("userId",
-		// "19182358")
-		// .add("mstoken",
-		// "5faf0e7dfee2498597754f2b862bb41e9PsoAyIyHN2LnszLRinYO6QQhT8XrEXFsPgbOwKUxpINkPsp1dLiBE9q0DqAXeXA")
-		// .build();
+		String json = HttpUtil.post(url1, null, header);
+		System.out.println(json);
 
-		RequestBody body1 = new FormBody.Builder().add("userId", "19182358")
-				.add("mstoken",
-						"5faf0e7dfee2498597754f2b862bb41e9PsoAyIyHN2LnszLRinYO6QQhT8XrEXFsPgbOwKUxpINkPsp1dLiBE9q0DqAXeXA")
-				.build();
-		String res = HttpUtil.post("http://m.t4.zbjdev.com/bidpay/sendSms", body1);
-		System.out.println(res);
-
+		JsonPath jp = new JsonPath(json);
+		System.out.println(jp.getInt("errCode"));
+		System.out.println(jp.getString("errMsg"));
+		System.out.println(jp.getMap("data"));
 	}
 }
