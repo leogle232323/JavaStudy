@@ -4,140 +4,142 @@
  */
 package tools;
 
-import  java.sql.DriverManager;
-import  java.sql.Connection;
-import  java.sql.SQLException;
-import  java.sql.Statement;
-import  java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class MySqlUtil {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private  String url;
-	private  String name;
-	private  String password;
-	private  Connection con = null;
-	private  Statement  stm = null;
-	private  ResultSet  res = null;
-	
-	static{
-		try{
-			Class.forName(DRIVER).newInstance();
-		}catch(ClassNotFoundException | InstantiationException | IllegalAccessException e){
+	private String url;
+	private String name;
+	private String password;
+	private Connection con = null;
+	private Statement stm = null;
+	private ResultSet res = null;
+
+	static {
+		try {
+			Class.forName(DRIVER);
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 构造方法
-	 * @param  url        数据库地址
-	 * @param  name       数据库用户名
-	 * @param  password   数据库密码
+	 * 
+	 * @param url
+	 *            数据库地址
+	 * @param name
+	 *            数据库用户名
+	 * @param password
+	 *            数据库密码
 	 */
 
-
-	public  MySqlUtil(String url,String name,String password){
+	public MySqlUtil(String url, String name, String password) {
 		this.url = url;
 		this.name = name;
 		this.password = password;
 	}
-	
+
 	/**
 	 * 连接mysql数据库
 	 * 
 	 */
-	public  boolean Connect(){
-		try{
-			con = DriverManager.getConnection("jdbc:mysql://" + url,name,password);
+	public boolean Connect() {
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://" + url, name, password);
 			stm = con.createStatement();
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		return true;	
+		return true;
 	}
-	
+
 	/**
 	 * 数据库查询
 	 * 
 	 */
-	public  ResultSet Query(String cmd){
-		try{
+	public ResultSet Query(String cmd) {
+		try {
 			res = stm.executeQuery(cmd);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
+
 	/**
 	 * 数据库插入
 	 *
 	 */
-	public  boolean insert(String cmd){
-		try{
+	public boolean insert(String cmd) {
+		try {
 			stm.executeUpdate(cmd);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 数据库更新
 	 * 
 	 */
-	public  boolean update(String cmd){
-		try{
+	public boolean update(String cmd) {
+		try {
 			stm.executeUpdate(cmd);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 数据库删除
 	 * 
 	 */
-	public  boolean delete(String cmd){
-		try{
+	public boolean delete(String cmd) {
+		try {
 			stm.executeUpdate(cmd);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}	
+		}
 		return true;
 	}
-	
+
 	/**
 	 * 关闭连接
 	 * 
 	 */
-	public  boolean Close(){
-		try{
-			
-			if(res != null){
+	public boolean Close() {
+		try {
+
+			if (res != null) {
 				res.close();
 				res = null;
 			}
-			
-			if(stm != null){
+
+			if (stm != null) {
 				stm.close();
 				stm = null;
 			}
-			
-			if(con != null){
+
+			if (con != null) {
 				con.close();
 				con = null;
 			}
-				
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
 }
-

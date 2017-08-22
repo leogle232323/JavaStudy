@@ -2,6 +2,7 @@ package project;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import tools.MySqlUtil;
 
@@ -20,8 +21,11 @@ public class ConnectToDataBase {
 
 	public static void main(String[] args) throws SQLException {
 		MySqlUtil sqlUtil = getSqlUtilDataBaseM1();
+		long start = new Date().getTime();
 		String sql = "SELECT COUNT(*) AS count FROM zhubajie_market.mk_task";
 		ResultSet result = sqlUtil.Query(sql);
+		long end = new Date().getTime();
+		System.out.println("查询耗时：" + (float) (end - start) / 1000 + "s");
 		while (result.next()) {
 			System.out.println(result.getInt("count"));
 		}

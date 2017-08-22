@@ -17,7 +17,7 @@ public class Utils {
 	 * 
 	 */
 	public static String getUserKey(String userId) throws IOException {
-		String url = "http://task.e1.tp.com/api/login?uid=" + userId;
+		String url = "http://task.e1.zbjdev.com/api/login?uid=" + userId;
 		return HttpUtil.getHeaders(url).get("set-cookie").split(";")[0];
 	}
 

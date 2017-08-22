@@ -85,8 +85,7 @@ public class HttpUtil {
 	 */
 	public static String post(String url, String json) throws IOException {
 		RequestBody body = RequestBody.create(JSON, json);
-		Builder builder = new Builder();
-		Request request = builder.url(url).post(body).build();
+		Request request = new Request.Builder().url(url).post(body).build();
 		Response response = client.newCall(request).execute();
 
 		if (response.isSuccessful()) {

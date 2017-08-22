@@ -18,11 +18,11 @@ public class Salary {
 		int january = 5000;
 		int february = 5000;
 
-		arrList.add(june);
-		arrList.add(july);
-		arrList.add(august);
-		arrList.add(september);
-		arrList.add(october);
+		// arrList.add(june);
+		// arrList.add(july);
+		// arrList.add(august);
+		// arrList.add(september);
+		// arrList.add(october);
 		arrList.add(november);
 		arrList.add(december);
 		arrList.add(thirteen);
