@@ -12,6 +12,6 @@ public class UrlCode {
 
 		String decodeStr = URLDecoder.decode("eexMCORYEhWc4PGAqDVeUw%3D%3D", "UTF-8");
 		System.out.println(decodeStr);
-	}
 
+	}
 }
