@@ -23,5 +23,6 @@ public class JsonPathProject {
 		System.out.println(jp.getInt("errCode"));
 		System.out.println(jp.getString("errMsg"));
 		System.out.println(jp.getMap("data"));
+
 	}
 }
