@@ -42,8 +42,7 @@ public class HttpClientUtil {
 	 */
 	public static String sendGet(String url) throws ClientProtocolException, IOException {
 		HttpGet httpGet = new HttpGet(url);
-		String responseBody = client.execute(httpGet, responseHandler);
-		return responseBody;
+		return client.execute(httpGet, responseHandler);
 	}
 
 	/**
@@ -58,9 +57,7 @@ public class HttpClientUtil {
 		for (String value : headers.keySet()) {
 			httpGet.addHeader(value, headers.get(value));
 		}
-		String responseBody = client.execute(httpGet, responseHandler);
-		return responseBody;
-
+		return client.execute(httpGet, responseHandler);
 	}
 
 	/**
@@ -76,8 +73,7 @@ public class HttpClientUtil {
 		entity.setContentEncoding("UTF-8");
 		entity.setContentType("application/json");
 		httpPost.setEntity(entity);
-		String responseBody = client.execute(httpPost, responseHandler);
-		return responseBody;
+		return client.execute(httpPost, responseHandler);
 	}
 
 	@Test
