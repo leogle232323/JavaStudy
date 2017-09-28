@@ -6,8 +6,8 @@ import java.util.Map;
 
 import com.jayway.restassured.path.json.JsonPath;
 
-import project.Utils;
 import tools.HttpUtil;
+import tools.Utils;
 
 public class JsonPathProject {
 	public static void main(String[] args) throws IOException {
