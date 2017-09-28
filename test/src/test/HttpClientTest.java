@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.apache.http.client.ClientProtocolException;
 import org.junit.Test;
 
@@ -38,4 +39,17 @@ public class HttpClientTest {
 		System.out.println(HttpClientUtil.sendPost(url, json));
 
 	}
+
+	@Test
+	public void testSendGetHeader() throws ClientProtocolException, IOException {
+		String url = "http://task.e1.zbjdev.com/api/login?uid=23569494";
+		Header[] headers = HttpClientUtil.sendGetHeader(url);
+		for (Header value : headers) {
+			if (value.getValue().contains("userkey")) {
+				System.out.println(value.getValue().split(";")[0]);
+				break;
+			}
+		}
+	}
+
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -33,7 +34,7 @@ public class HttpClientUtil {
 	};
 
 	/**
-	 * 发送get请求，无header
+	 * 发送get请求，无请求header
 	 * 
 	 * @param url
 	 * @throws IOException
@@ -45,7 +46,7 @@ public class HttpClientUtil {
 	}
 
 	/**
-	 * 发送get请求，有header
+	 * 发送get请求，有请求header
 	 * 
 	 * @param url
 	 * @param headers
@@ -59,6 +60,15 @@ public class HttpClientUtil {
 			httpGet.addHeader(value, headers.get(value));
 		}
 		return client.execute(httpGet, responseHandler);
+	}
+
+	/**
+	 * 发送get请求，获取响应header
+	 */
+	public static Header[] sendGetHeader(String url) throws ClientProtocolException, IOException {
+		HttpGet httpGet = new HttpGet(url);
+		HttpResponse response = client.execute(httpGet);
+		return response.getAllHeaders();
 	}
 
 	/**
