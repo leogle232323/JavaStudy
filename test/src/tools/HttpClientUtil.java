@@ -65,7 +65,7 @@ public class HttpClientUtil {
 	/**
 	 * 发送get请求，获取响应header
 	 */
-	public static Header[] sendGetHeader(String url) throws ClientProtocolException, IOException {
+	public static Header[] sendGetHeaders(String url) throws ClientProtocolException, IOException {
 		HttpGet httpGet = new HttpGet(url);
 		HttpResponse response = client.execute(httpGet);
 		return response.getAllHeaders();

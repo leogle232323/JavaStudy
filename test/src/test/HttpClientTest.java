@@ -41,9 +41,9 @@ public class HttpClientTest {
 	}
 
 	@Test
-	public void testSendGetHeader() throws ClientProtocolException, IOException {
+	public void testSendGetHeaders() throws ClientProtocolException, IOException {
 		String url = "http://task.e1.zbjdev.com/api/login?uid=23569494";
-		Header[] headers = HttpClientUtil.sendGetHeader(url);
+		Header[] headers = HttpClientUtil.sendGetHeaders(url);
 		for (Header value : headers) {
 			if (value.getValue().contains("userkey")) {
 				System.out.println(value.getValue().split(";")[0]);
